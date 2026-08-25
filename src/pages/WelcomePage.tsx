@@ -1,19 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
 
 export const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
-  const { setActiveRole } = useApp();
 
   const handleSelectDriver = () => {
-    setActiveRole('MOTORISTA');
-    navigate('/motorista/dashboard');
+    navigate('/login?role=MOTORISTA');
   };
 
   const handleSelectClient = () => {
-    setActiveRole('CLIENTE');
-    navigate('/cliente/dashboard');
+    navigate('/login?role=CLIENTE');
   };
 
   return (
@@ -67,7 +63,7 @@ export const WelcomePage: React.FC = () => {
             <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Como você deseja acessar?</span>
             <h2 className="font-headline text-2xl font-bold text-primary mt-1 mb-2">Escolha seu perfil</h2>
             <p className="text-xs text-on-surface-variant mb-8 leading-relaxed">
-              Tenha acesso a ferramentas dedicadas para embarcadores ou transportadores.
+              Selecione o seu perfil para acessar a área segura de login e gerenciamento.
             </p>
 
             <div className="space-y-4">
@@ -82,7 +78,7 @@ export const WelcomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-headline font-bold text-sm text-white">Sou Motorista / Transportador</h3>
-                    <p className="text-xs text-gray-300">Pegar cargas, calcular fretes e gerenciar entregas Full</p>
+                    <p className="text-xs text-gray-300">Acessar agenda, calcular fretes e gerenciar entregas Full</p>
                   </div>
                 </div>
                 <span className="material-symbols-outlined text-secondary-fixed group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -99,7 +95,7 @@ export const WelcomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-headline font-bold text-sm text-primary">Sou Cliente / Embarcador</h3>
-                    <p className="text-xs text-on-surface-variant">Cotar fretes, agendar docas Full e rastrear envios</p>
+                    <p className="text-xs text-on-surface-variant">Acessar painel de envios, agendar docas Full e rastrear</p>
                   </div>
                 </div>
                 <span className="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -107,24 +103,11 @@ export const WelcomePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-surface-container-high mt-8 space-y-2">
-            <div className="flex items-center justify-between text-xs text-on-surface-variant">
-              <span>Primeira vez aqui?</span>
-              <div className="flex gap-3 font-semibold text-primary">
-                <button onClick={() => navigate('/cadastro-cliente')} className="hover:underline">Cadastrar Loja</button>
-                <span>•</span>
-                <button onClick={() => navigate('/cadastro-motorista')} className="hover:underline text-secondary">Cadastrar Veículo</button>
-              </div>
-            </div>
-            <div className="text-center pt-2">
-              <button
-                onClick={() => navigate('/login')}
-                className="text-xs font-bold text-secondary hover:underline flex items-center justify-center gap-1 mx-auto"
-              >
-                <span className="material-symbols-outlined text-sm">login</span>
-                <span>Já tem uma conta? Fazer Login</span>
-              </button>
-            </div>
+          <div className="pt-8 border-t border-surface-container-high mt-8 text-center space-y-2">
+            <p className="flex items-center justify-center gap-1.5 text-xs text-on-surface-variant">
+              <span className="material-symbols-outlined text-base text-secondary">verified_user</span>
+              <span>Acesso seguro & autenticado para o ecossistema Mercado Full</span>
+            </p>
           </div>
         </div>
       </div>

@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { authService } from '../services/authService';
 import type { UserRole } from '../types';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { setActiveRole, setCurrentUser } = useApp();
 
-  const [role, setRole] = useState<UserRole>('CLIENTE');
+  const initialRole = (searchParams.get('role') as UserRole) || 'CLIENTE';
+  const [role, setRole] = useState<UserRole>(initialRole);
+
+  useEffect(() => {
+    const urlRole = searchParams.get('role') as UserRole;
+    if (urlRole === 'CLIENTE' || urlRole === 'MOTORISTA') {
+      setRole(urlRole);
+    }
+  }, [searchParams]);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
